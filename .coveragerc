@@ -1,0 +1,10 @@
+[run]
+branch = True
+source =
+    creds/
+    voting/
+omit =
+    unit*.py
+    test*.py
+    doc/*
+    */orm/*
