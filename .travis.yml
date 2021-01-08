@@ -1,0 +1,13 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=381a1f104e7eba2df5e70d9b78c7e157a267018e363016f93a746dbe7b55e192
+
+language: python
+python:
+  - "3.9"
+install: 
+  - pip install -r requirements.text
+script:
+  - python manage.py test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
