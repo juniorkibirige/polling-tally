@@ -17,7 +17,7 @@
 ## Test and test coverage
 1. To run tests, run `coverage run manage.py test`
 1. To get a coverage report, run `coverage report`
-1. If you aren't all about that, just look at the coverage reports at the top of this readme
+1. If you aren't all about that, just look at the coverage badges at the top of this readme
 
 
 ## Contributing

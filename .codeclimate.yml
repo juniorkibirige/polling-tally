@@ -1,0 +1,5 @@
+version: "2"
+exclude_patterns:
+  - "static/css/sb**"
+  - "static/js/sb**"
+  - "static/css/fontawesome-free/"
