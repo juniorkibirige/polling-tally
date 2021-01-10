@@ -1,5 +1,5 @@
 version: "2"
 exclude_patterns:
-  - "static/css/sb**"
-  - "static/js/sb**"
-  - "static/css/fontawesome-free/"
+  - "static/css/sb-admin-2.css"
+  - "static/js/sb-admin-2.js"
+  - "static/fontawesome-free/"
