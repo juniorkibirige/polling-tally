@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from creds.forms import CreateUserForm
+from creds.forms import (
+    CreateUserForm, UserPassResetForm, UserLoginForm
+)
 
 
 def login(request):
-    return render(request, 'creds/login.html')
+    form = UserLoginForm()
+    context = {'form': form}
+    return render(request, 'creds/login.html', context)
 
 
 def signup(request):
@@ -13,4 +17,6 @@ def signup(request):
 
 
 def reset_password(request):
-    return render(request, 'creds/reset-password.html')
+    form = UserPassResetForm()
+    context = {'form': form}
+    return render(request, 'creds/reset-password.html', context)
