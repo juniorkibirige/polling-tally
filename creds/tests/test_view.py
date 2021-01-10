@@ -11,12 +11,14 @@ class CredsTestCate(TestCase):
 
     def test_sign_up_page_uses_correct_template(self):
         r = self.client.get('/signup')
-        html = r.content
+        page_content = r.content.decode('utf8')
         self.assertEquals(r.status_code, 200)
         self.assertTemplateUsed('signup.html')
-        self.assertEqual(html.find('title'), 'Sign Up')
+        self.assertInHTML('<title>Signup</title>', page_content)
 
     def test_reset_password_page_setup(self):
         r = self.client.get('/reset-password')
+        page_content = r.content.decode('utf8')
         self.assertEquals(r.status_code, 200)
-        self.assertTemplateUsed('reset-passwrd.html')
+        self.assertTemplateUsed('reset-password.html')
+        self.assertInHTML('<title>Reset Password</title>', page_content)
