@@ -15,7 +15,7 @@ urlpatterns = [
     path('subcounty', SubcountyListView.as_view(), name="subcounty-list"),
     path('subcounty/<int:pk>/detail', SubcountyDetailView.as_view(), name="subcounty-detail"),
     path('parish', ParishListView.as_view(), name="parish-list"),
-    path('parish/<int:pk>/detail', ParishListView.as_view(), name="parish-detail"),
+    path('parish/<int:pk>/detail', ParishDetailView.as_view(), name="parish-detail"),
     path('pollingstation', PollingstationListView.as_view(), name="pollingstation-list"),
     path('pollingstation/<int:pk>/detail', PollingstationDetailView.as_view(), name="pollingstation-detail"),
 ]
