@@ -3,7 +3,9 @@ from voting.views.web import (
     CountyListView, CountyDetailView,
     SubcountyListView, SubcountyDetailView,
     ParishListView, ParishDetailView,
-    PollingstationListView, PollingstationDetailView
+    PollingstationListView, PollingstationDetailView,
+    PollingCandidatesDataUploadView, PollingStationDataUploadView,
+    show_all_candidates
 )
 from django.urls import path
 
@@ -18,4 +20,7 @@ urlpatterns = [
     path('parish/<int:pk>/detail', ParishDetailView.as_view(), name="parish-detail"),
     path('pollingstation', PollingstationListView.as_view(), name="pollingstation-list"),
     path('pollingstation/<int:pk>/detail', PollingstationDetailView.as_view(), name="pollingstation-detail"),
+    path('pollingstation-dataupload', PollingStationDataUploadView.as_view(), name="pollingstation-dataupload"),
+    path('pollingcandidate-dataupload', PollingCandidatesDataUploadView.as_view(), name="pollingcandidate-dataupload"),
+    path('candidates', show_all_candidates, name="all-candidates")
 ]

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Upload Polling Candidate Data {% endblock %} 
+{% block content %}
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-body">
+                <form method='POST'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{form.file}}
+                        {{form.file.errors}}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Process File</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+{% block js %} {% endblock %}
