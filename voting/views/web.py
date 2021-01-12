@@ -5,7 +5,10 @@ from django.views.generic import ListView, DetailView, View
 from voting.forms import (
     PollingStationDataUploadForm, PollingCandidateDataUploadForm
 )
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from pyexcel_xls import get_data as xls_get
+from pyexcel_xlsx import get_data as xlsx_get
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 class DistrictListView(ListView):
@@ -115,7 +118,33 @@ class PollingStationDataUploadView(View):
         return render(request, 'voting/polling-station-dataupload.html', context)
 
     def post(self, request):
-        pass
+        print(request)
+        try:
+            file = request.FILES['file']
+            if (str(file).split('.')[-1] == "xls"):
+                data = xls_get(file, column_limit=12)
+            elif (str(file).split('.')[-1] == "xlsx"):
+                data = xlsx_get(file, column_limit=12)
+            else:
+                return redirect('/pollingstations')
+
+            # The data is in a sheet labelled PS
+            # ToDo: We'll refactor this later. For now, I need to get the data into the application
+            # So this function might be a long with multiple ifs, but it'll be okay.
+            iterator = 1
+            for row in data['PS']:
+                if (len(row) > 0):
+                    serial_no, district_code, district_name, county_code, county_name, subcounty_code, subcounty_name, parish_code, parish_name, polling_station_code, polling_station_name, voter_count = row
+                    print(str(serial_no) + ' Serial number')
+                    print(str(district_code) + ' District Code')
+                    print(str(district_name) + ' District Name')
+                    print('------------------------------------')
+                iterator += 1
+                if iterator == 15:
+                    break
+        except MultiValueDictKeyError:
+            print('Exception caught')
+            return redirect('/pollingstations')
 
 
 class PollingCandidatesDataUploadView(View):
