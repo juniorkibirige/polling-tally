@@ -147,35 +147,35 @@ class PollingStationDataUploadView(View):
                         if district_name:
                             district = District.objects.create(name=district_name, code=district_code, created_by=admin_user, updated_by=admin_user)
 
-            #         # Save Counties
-            #         if County.objects.filter(name=county_name, code=county_code).exists():
-            #             county = County.objects.filter(name=county_name, code=county_code)
-            #         else:
-            #             if county_name and county_name != "VOTER STATS AND POLLING STATIONS AS OF GENERAL ELECTIONS 2020/2021":
-            #                 county = County.objects.create(name=county_name, code=county_code, district=district, created_by=admin_user, updated_by=admin_user)
+                    # Save Counties
+                    if County.objects.filter(name=county_name, code=county_code).exists():
+                        county_ = County.objects.get(name=county_name, code=county_code)
+                    else:
+                        if county_name:
+                            county_ = County.objects.create(name=county_name, code=county_code, district=district, created_by=admin_user, updated_by=admin_user)
 
-            #         # Save Sub counties
-            #         if Subcounty.objects.filter(name=subcounty_name, code=subcounty_code).exists():
-            #             subcounty = Subcounty.objects.filter(name=subcounty_name, code=subcounty_code)
-            #         else:
-            #             if subcounty_name and subcounty_name != "VOTER STATS AND POLLING STATIONS AS OF GENERAL ELECTIONS 2020/2021":
-            #                 subcounty = Subcounty.objects.create(name=subcounty_name, code=subcounty_code, county=county, created_by=admin_user, updated_by=admin_user)
+                    # Save Sub counties
+                    if Subcounty.objects.filter(name=subcounty_name, code=subcounty_code).exists():
+                        subcounty = Subcounty.objects.get(name=subcounty_name, code=subcounty_code)
+                    else:
+                        if subcounty_name:
+                            subcounty = Subcounty.objects.create(name=subcounty_name, code=subcounty_code, county=county_, created_by=admin_user, updated_by=admin_user)
 
-            #         # Save Parishes
-            #         if Parish.objects.filter(name=parish_name, code=parish_code).exists():
-            #             pass
-            #         else:
-            #             if parish_name and parish_name != "VOTER STATS AND POLLING STATIONS AS OF GENERAL ELECTIONS 2020/2021":
-            #                 Parish.objects.create(name=parish_name, code=parish_code, subcounty=subcounty, created_by=admin_user, updated_by=admin_user)
+                    # Save Parishes
+                    if Parish.objects.filter(name=parish_name, code=parish_code).exists():
+                        pass
+                    else:
+                        if parish_name and parish_name:
+                            Parish.objects.create(name=parish_name, code=parish_code, subcounty=subcounty, created_by=admin_user, updated_by=admin_user)
 
-            #         # if county:
-            #         #     # Save Polling Stations
-            #         #     if Pollingstation.objects.filter(name=polling_station_name, code=polling_station_code, county=county).exists():
-            #         #         pass
-            #         #     else:
-            #         #         if polling_station_name and polling_station_name != "VOTER STATS AND POLLING STATIONS AS OF GENERAL ELECTIONS 2020/2021":
-            #         #             Pollingstation.objects.create(name=polling_station_name, code=polling_station_code, county=county, total_voters=voter_count, created_by=admin_user, updated_by=admin_user)
-
+                    if county_:
+                        # Save Polling Stations
+                        if Pollingstation.objects.filter(name=polling_station_name, code=polling_station_code, county=county_).exists():
+                            pass
+                        else:
+                            if polling_station_name and polling_station_name:
+                                Pollingstation.objects.create(name=polling_station_name, code=polling_station_code, county=county_, total_voters=voter_count, created_by=admin_user, updated_by=admin_user)
+            return redirect('/pollingstations')
         except MultiValueDictKeyError:
             print('Exception caught')
             return redirect('/pollingstations')

@@ -15,7 +15,7 @@ class BaseModel(models.Model):
 
 
 class LocaleBaseModel(BaseModel):
-    code = models.CharField(max_length=64, unique=True)
+    code = models.CharField(max_length=64, unique=False)
     boundary_data = models.TextField(null=True, blank=True)
 
     class Meta:
@@ -53,5 +53,5 @@ class Pollingstation(BaseModel):
     county = models.ForeignKey('County', on_delete=models.CASCADE)
     code = models.CharField(max_length=64, null=True)
     total_voters = models.IntegerField(blank=False)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True), True
