@@ -55,3 +55,6 @@ class Pollingstation(BaseModel):
     total_voters = models.IntegerField(blank=False)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True), True
+
+    def __str__(self):
+        return self.name
